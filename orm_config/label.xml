@@ -1,0 +1,12 @@
+<table name="label" namespace="blog.data" desc="标签表">
+    <columns>
+        <column name="l_id" type="int64" auto_increment="true" desc="标签id"/>
+        <column name="name" type="string" length="100" desc="名称"/>
+        <column name="is_deleted" type="int32" desc="是否删除"/>
+        <column name="create_time" type="datetime" desc="创建时间"/>
+    </columns>
+    <indexs>
+        <index name="pk" cols="l_id" type="pk"/>
+        <index name="name" cols="name" type="uniq"/>
+    </indexs>
+</table>
