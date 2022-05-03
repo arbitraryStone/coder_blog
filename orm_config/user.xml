@@ -1,0 +1,17 @@
+<table name="user" namespace="blog.data" desc="用户表">
+    <columns>
+        <column name="id" type="int64" auto_increment="true" desc="用户id"/>
+        <column name="nickname" type="string" length="30" desc="昵称"/>
+        <column name="email" type="string" length="50" desc="邮件地址"/>
+        <column name="password" type="string" length="50" desc="密码"/>
+        <column name="picture" type="string" length="100" desc="头像"/>
+        <column name="username" type="string" length="30" desc="用户名"/>
+        <column name="create_time" type="datetime" desc="创建时间"/>
+        <column name="update_time" type="datetime" update="current_timestamp" desc="修改时间"/>
+    </columns>
+    <indexs>
+        <index name="pk" cols="id" type="pk"/>
+        <index name="email" cols="email" type="uniq"/>
+        <index name="username" cols="username" type="uniq"/>
+    </indexs>
+</table>

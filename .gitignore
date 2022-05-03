@@ -1,0 +1,9 @@
+tags
+bin/*
+!/bin/conf
+lib/*
+build/*
+stone/bin/*
+!stone/bin/conf
+stone/lib/*
+stone/build/*
