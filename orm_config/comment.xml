@@ -11,7 +11,7 @@
         <column name="create_time" type="datetime" desc="创建时间"/>
     </columns>
     <indexs>
-        <index name="pk" cols="id" type="pk"/>
+        <index name="pk" cols="c_id" type="pk"/>
         <index name="user_id" cols="user_id" type="index"/>
         <index name="article_id" cols="article_id" type="index"/>
     </indexs>

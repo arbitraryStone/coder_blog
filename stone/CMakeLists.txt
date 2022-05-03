@@ -27,7 +27,7 @@ link_directories(/usr/lib)
 link_directories(/usr/local/lib/)
 link_directories(/usr/local/lib64)
 link_directories(/usr/lib64)
-#link_directories(/usr/lib64/mysql)
+link_directories(/usr/lib64/mysql)
 option(BUILD_TEST "ON for complile test" OFF)
 
 find_package(Boost REQUIRED)
@@ -41,6 +41,9 @@ set(LIB_SRC
     src/bytearray.cpp
     src/config.cpp
     src/db/sqlite3.cpp
+    src/db/redis.cc
+    src/db/mysql.cc
+    src/db/fox_thread.cc
     src/email/email.cpp
     src/env.cpp
     src/daemon.cpp
@@ -82,6 +85,11 @@ force_redefine_file_macro_for_sources(stone)
 #SET_TARGET_PROPERTIES (stone_static PROPERTIES OUTPUT_NAME "stone")
 
 find_library(PTHREAD pthread)
+
+find_package(OpenSSL REQUIRED)
+if(OPENSSL_FOUND)
+    include_directories(${OPENSSL_INCLUDE_DIR})
+endif()
 #set(LIBS ${LIBS} stone)
 #set(LIBS ${LIBS} dl)
 #set(LIBS ${LIBS} ${YAMLCPP})
@@ -92,6 +100,10 @@ set(LIBS
         dl
         pthread
         sqlite3
+        event
+        ${OPENSSL_LIBRARIES}
+        hiredis_vip
+        mysqlclient
         tinyxml2
         jsoncpp
         yaml-cpp -ldl

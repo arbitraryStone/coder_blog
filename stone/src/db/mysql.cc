@@ -657,8 +657,8 @@ MySQLStmtRes::ptr MySQLStmtRes::Create(std::shared_ptr<MySQLStmt> stmt) {
         rt->m_binds[i].buffer = rt->m_datas[i].data;
         rt->m_binds[i].buffer_length = rt->m_datas[i].data_length;
         rt->m_binds[i].length = &rt->m_datas[i].length;
-        rt->m_binds[i].is_null = &rt->m_datas[i].is_null;
-        rt->m_binds[i].error = &rt->m_datas[i].error;
+        rt->m_binds[i].is_null = (char*)&rt->m_datas[i].is_null;
+        rt->m_binds[i].error = (char*)&rt->m_datas[i].error;
     }
 
     if(mysql_stmt_bind_result(stmt->getRaw(), &rt->m_binds[0])) {
@@ -1011,7 +1011,7 @@ MySQL::ptr MySQLManager::get(const std::string& name) {
                 return MySQL::ptr(rt, std::bind(&MySQLManager::freeMySQL,
                             this, name, std::placeholders::_1));
             } else {
-                STONE_LOG_WARNING(g_logger) << "reconnect " << name << " fail";
+                STONE_LOG_WARN(g_logger) << "reconnect " << name << " fail";
                 return nullptr;
             }
         }
